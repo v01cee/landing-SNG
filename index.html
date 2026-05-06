@@ -169,8 +169,22 @@
       margin-bottom: 28px;
     }
     .hero-title .accent {
-      background: linear-gradient(135deg, #60a5fa, #06b6d4, #3b82f6);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      color: #ff3b3b;
+      -webkit-text-fill-color: #ff3b3b;
+    }
+
+    /* Split-flap ticker */
+    .flap-char {
+      display: inline-block;
+      color: #ff3b3b;
+      -webkit-text-fill-color: #ff3b3b;
+    }
+    @keyframes flap-in {
+      0%   { transform: rotateX(90deg); opacity: 0; }
+      100% { transform: rotateX(0deg);  opacity: 1; }
+    }
+    .flap-char.flip {
+      animation: flap-in .08s ease-out forwards;
     }
     .hero-sub {
       font-size: clamp(18px, 2.5vw, 22px); font-weight: 400;
@@ -815,6 +829,44 @@
       ? 'rgba(2,4,8,.95)'
       : 'rgba(2,4,8,.7)';
   }, { passive: true });
+
+  // Split-flap ticker for "Dangerous."
+  (function() {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#@!%&';
+    const target = 'DANGEROUS.';
+    const el = document.querySelector('.hero-title .accent');
+    if (!el) return;
+
+    // Build span-per-char structure
+    el.innerHTML = target.split('').map(c =>
+      `<span class="flap-char">${c}</span>`
+    ).join('');
+    const spans = el.querySelectorAll('.flap-char');
+
+    function scrambleChar(span, finalChar, delay) {
+      let ticks = 0;
+      const maxTicks = 8 + Math.floor(Math.random() * 8);
+      setTimeout(() => {
+        const interval = setInterval(() => {
+          if (ticks >= maxTicks) {
+            clearInterval(interval);
+            span.textContent = finalChar;
+            span.classList.add('flip');
+          } else {
+            span.textContent = chars[Math.floor(Math.random() * chars.length)];
+            span.classList.remove('flip');
+            void span.offsetWidth; // reflow
+            span.classList.add('flip');
+            ticks++;
+          }
+        }, 60);
+      }, delay);
+    }
+
+    spans.forEach((span, i) => {
+      scrambleChar(span, target[i], i * 80);
+    });
+  })();
 </script>
 </body>
 </html>
