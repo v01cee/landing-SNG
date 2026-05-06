@@ -1,0 +1,7 @@
+services:
+  landing:
+    build: .
+    container_name: omb-landing
+    restart: unless-stopped
+    ports:
+      - "80:80"
