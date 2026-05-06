@@ -389,10 +389,41 @@
       .pricing-card { padding: 36px 24px; }
       nav { padding: 14px 16px; }
       .nav-cta { display: none; }
+
+      /* Hero badge — не переносится */
+      .hero-badge { font-size: 10px; letter-spacing: .07em; padding: 7px 14px; text-align: center; }
+
+      /* CTA button — текст в одну строку */
+      .btn--lg { font-size: 17px; padding: 18px 28px; }
+      .btn-arrow { display: none; }
+
+      /* Proof strip — 2 колонки */
+      .proof-strip-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px 16px;
+        padding: 0 16px;
+      }
+      .proof-item { font-size: 13px; }
+
+      /* Formula — вертикально */
+      .formula-parts { flex-direction: column; align-items: center; gap: 8px; }
+      .formula-op { transform: rotate(90deg); }
+
+      /* Section padding */
+      .section--sm { padding: 56px 0; }
+      #final { padding: 80px 24px; }
     }
+
     @media (max-width: 480px) {
       .who-grid { grid-template-columns: 1fr; }
       .formula-parts { gap: 8px; }
+
+      /* Hero title размер */
+      .hero-title { font-size: 42px; }
+
+      /* Trust items — 1 колонка */
+      .trust-items { grid-template-columns: 1fr; }
     }
   </style>
 </head>
