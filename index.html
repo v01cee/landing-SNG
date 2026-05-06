@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OMB Starter Guide — Build a Second Income with AI</title>
+  <meta name="description" content="One paycheck is dangerous. Build a second income with a One Man Business using AI, simple skills, and modern tools. Get instant access for $7." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #020408;
+      --navy: #080e1a;
+      --navy-2: #0d1628;
+      --navy-3: #111d33;
+      --blue: #2563eb;
+      --blue-bright: #3b82f6;
+      --blue-glow: #60a5fa;
+      --cyan: #06b6d4;
+      --emerald: #10b981;
+      --white: #f8fafc;
+      --white-60: rgba(248,250,252,.6);
+      --white-30: rgba(248,250,252,.3);
+      --white-10: rgba(248,250,252,.1);
+      --white-05: rgba(248,250,252,.05);
+      --border: rgba(255,255,255,.08);
+      --card-bg: rgba(255,255,255,.04);
+      --gradient-hero: linear-gradient(135deg, #020408 0%, #0a1628 50%, #020408 100%);
+      --gradient-blue: linear-gradient(135deg, #1d4ed8, #0ea5e9);
+      --gradient-glow: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(37,99,235,.25) 0%, transparent 70%);
+      --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--black);
+      color: var(--white);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── UTILITIES ── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .container--narrow { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+
+    .section { padding: 100px 0; }
+    .section--sm { padding: 72px 0; }
+
+    .tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 600; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--blue-glow);
+      background: rgba(37,99,235,.15); border: 1px solid rgba(37,99,235,.3);
+      padding: 6px 14px; border-radius: 100px; margin-bottom: 24px;
+    }
+    .tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--blue-glow); animation: pulse 2s infinite; }
+
+    @keyframes pulse { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .4; transform: scale(.8); } }
+
+    .headline { font-size: clamp(38px, 7vw, 72px); font-weight: 900; line-height: 1.05; letter-spacing: -.03em; }
+    .headline span { background: var(--gradient-blue); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    .subheadline { font-size: clamp(18px, 2.5vw, 22px); font-weight: 400; color: var(--white-60); line-height: 1.6; }
+
+    .section-label {
+      font-size: 11px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--blue-bright); margin-bottom: 16px;
+    }
+    .section-title { font-size: clamp(28px, 4vw, 44px); font-weight: 800; line-height: 1.15; letter-spacing: -.02em; margin-bottom: 16px; }
+    .section-sub { font-size: 17px; color: var(--white-60); max-width: 560px; }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      font-family: var(--font); font-size: 17px; font-weight: 700; cursor: pointer;
+      border: none; border-radius: 14px; transition: all .25s ease; text-decoration: none;
+    }
+    .btn--primary {
+      background: var(--gradient-blue);
+      color: #fff; padding: 18px 40px;
+      box-shadow: 0 0 40px rgba(37,99,235,.5), 0 4px 20px rgba(0,0,0,.4);
+    }
+    .btn--primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 60px rgba(59,130,246,.7), 0 8px 30px rgba(0,0,0,.5);
+    }
+    .btn--primary:active { transform: translateY(0); }
+
+    .btn--lg { font-size: 20px; padding: 22px 52px; border-radius: 16px; }
+
+    .btn-arrow { font-size: 20px; transition: transform .2s; }
+    .btn--primary:hover .btn-arrow { transform: translateX(4px); }
+
+    .trust-line {
+      display: flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: center;
+      font-size: 13px; color: var(--white-30); margin-top: 16px;
+    }
+    .trust-line .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--white-30); }
+
+    /* ── SCROLL ANIMATIONS ── */
+    .fade-up { opacity: 0; transform: translateY(40px); transition: opacity .7s ease, transform .7s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-up.delay-1 { transition-delay: .1s; }
+    .fade-up.delay-2 { transition-delay: .2s; }
+    .fade-up.delay-3 { transition-delay: .3s; }
+    .fade-up.delay-4 { transition-delay: .4s; }
+    .fade-up.delay-5 { transition-delay: .5s; }
+    .fade-up.delay-6 { transition-delay: .6s; }
+
+    /* ── DIVIDER ── */
+    .divider { height: 1px; background: var(--border); }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 16px 24px;
+      background: rgba(2,4,8,.7);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      transition: background .3s;
+    }
+    .nav-logo { font-size: 15px; font-weight: 800; letter-spacing: -.02em; color: var(--white); }
+    .nav-logo span { color: var(--blue-glow); }
+    .nav-cta { font-size: 14px; font-weight: 600; color: var(--white); background: var(--white-10); border: 1px solid var(--border); padding: 9px 20px; border-radius: 10px; text-decoration: none; transition: all .2s; }
+    .nav-cta:hover { background: rgba(37,99,235,.2); border-color: rgba(37,99,235,.4); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      background: var(--gradient-hero);
+      display: flex; align-items: center; justify-content: center; text-align: center;
+      position: relative; overflow: hidden; padding: 120px 24px 80px;
+    }
+    #hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: var(--gradient-glow);
+      pointer-events: none;
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(37,99,235,.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(37,99,235,.06) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+    }
+    .hero-inner { position: relative; max-width: 860px; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--blue-glow); border: 1px solid rgba(96,165,250,.3);
+      padding: 8px 18px; border-radius: 100px; margin-bottom: 32px;
+      background: rgba(37,99,235,.12);
+    }
+    .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #22d3ee; animation: pulse 2s infinite; }
+    .hero-title {
+      font-size: clamp(48px, 9vw, 88px); font-weight: 900;
+      letter-spacing: -.04em; line-height: 1.0;
+      margin-bottom: 28px;
+    }
+    .hero-title .accent {
+      background: linear-gradient(135deg, #60a5fa, #06b6d4, #3b82f6);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero-sub {
+      font-size: clamp(18px, 2.5vw, 22px); font-weight: 400;
+      color: var(--white-60); max-width: 620px; margin: 0 auto 20px;
+      line-height: 1.55;
+    }
+    .hero-trust-text {
+      font-size: 14px; color: var(--white-30); margin-bottom: 40px;
+      font-style: italic;
+    }
+    .hero-cta-wrap { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+    .price-badge {
+      font-size: 13px; font-weight: 600;
+      color: var(--emerald); background: rgba(16,185,129,.1); border: 1px solid rgba(16,185,129,.25);
+      padding: 6px 14px; border-radius: 8px; margin-bottom: 4px;
+    }
+
+    /* ── SOCIAL PROOF STRIP ── */
+    .proof-strip {
+      background: var(--navy-2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 24px 0;
+    }
+    .proof-strip-inner {
+      display: flex; align-items: center; justify-content: center;
+      flex-wrap: wrap; gap: 32px; 48px;
+    }
+    .proof-item { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--white-60); }
+    .proof-icon { font-size: 18px; }
+
+    /* ── PROBLEM ── */
+    #problem { background: var(--navy); }
+    .problem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 48px; }
+    .problem-card {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 16px; padding: 28px;
+      transition: border-color .3s, transform .3s;
+    }
+    .problem-card:hover { border-color: rgba(37,99,235,.4); transform: translateY(-4px); }
+    .problem-card-icon { font-size: 28px; margin-bottom: 16px; }
+    .problem-card-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .problem-card-text { font-size: 14px; color: var(--white-60); line-height: 1.55; }
+    .problem-conclusion {
+      text-align: center; margin-top: 48px; padding: 28px;
+      background: rgba(220,38,38,.08); border: 1px solid rgba(220,38,38,.2);
+      border-radius: 16px; font-size: 18px; font-weight: 600; color: rgba(252,165,165,.9);
+    }
+
+    /* ── SOLUTION ── */
+    #solution { background: var(--black); text-align: center; }
+    .solution-formula {
+      margin: 48px auto;
+      font-size: clamp(22px, 4vw, 38px); font-weight: 800;
+      letter-spacing: -.02em;
+      background: linear-gradient(135deg, #f8fafc, #60a5fa);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .formula-parts { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 12px; }
+    .formula-part {
+      background: var(--navy-2); border: 1px solid var(--border);
+      padding: 14px 24px; border-radius: 12px;
+      font-size: clamp(16px, 2.5vw, 22px); font-weight: 800;
+      color: var(--white);
+    }
+    .formula-op { font-size: clamp(20px, 3vw, 32px); font-weight: 700; color: var(--blue-glow); }
+    .formula-eq {
+      background: linear-gradient(135deg, #1d4ed8, #06b6d4);
+      padding: 14px 28px; border-radius: 12px;
+      font-size: clamp(16px, 2.5vw, 22px); font-weight: 800;
+    }
+    .solution-text { font-size: 17px; color: var(--white-60); max-width: 580px; margin: 0 auto; line-height: 1.65; }
+
+    /* ── PRODUCT ── */
+    #product { background: var(--navy); }
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 48px; }
+    .product-card {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 20px; padding: 32px;
+      transition: all .3s;
+      position: relative; overflow: hidden;
+    }
+    .product-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: var(--gradient-blue); opacity: 0; transition: opacity .3s;
+    }
+    .product-card:hover::before { opacity: 1; }
+    .product-card:hover { border-color: rgba(37,99,235,.3); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,.4); }
+    .product-num { font-size: 11px; font-weight: 700; letter-spacing: .1em; color: var(--blue-bright); margin-bottom: 12px; text-transform: uppercase; }
+    .product-card-title { font-size: 18px; font-weight: 700; margin-bottom: 10px; line-height: 1.3; }
+    .product-card-text { font-size: 14px; color: var(--white-60); line-height: 1.6; }
+    .product-card-icon { font-size: 32px; margin-bottom: 20px; }
+
+    /* ── TRANSFORMATION ── */
+    #transform { background: var(--black); }
+    .transform-grid { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 24px; margin-top: 48px; }
+    .transform-card {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 20px; padding: 36px; height: 100%;
+    }
+    .transform-card--before { border-color: rgba(220,38,38,.2); }
+    .transform-card--after { border-color: rgba(16,185,129,.25); background: rgba(16,185,129,.04); }
+    .transform-label { font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 20px; }
+    .transform-label--before { color: rgba(252,165,165,.8); }
+    .transform-label--after { color: var(--emerald); }
+    .transform-items { display: flex; flex-direction: column; gap: 14px; }
+    .transform-item { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: var(--white-60); }
+    .transform-item-icon { font-size: 16px; margin-top: 1px; flex-shrink: 0; }
+    .transform-arrow { font-size: 32px; color: var(--blue-glow); text-align: center; flex-shrink: 0; }
+
+    @media (max-width: 700px) {
+      .transform-grid { grid-template-columns: 1fr; }
+      .transform-arrow { transform: rotate(90deg); }
+    }
+
+    /* ── WHO ── */
+    #who { background: var(--navy); }
+    .who-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; margin-top: 44px; }
+    .who-tile {
+      display: flex; align-items: center; gap: 14px;
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 14px; padding: 20px;
+      transition: all .25s;
+    }
+    .who-tile:hover { border-color: rgba(37,99,235,.4); background: rgba(37,99,235,.07); }
+    .who-tile-icon { font-size: 22px; flex-shrink: 0; }
+    .who-tile-text { font-size: 15px; font-weight: 500; }
+
+    /* ── TRUST ── */
+    #trust { background: var(--black); }
+    .trust-inner { max-width: 720px; margin: 0 auto; text-align: center; }
+    .trust-items { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 44px; }
+    .trust-item {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 14px; padding: 24px;
+      font-size: 15px; font-weight: 500; color: var(--white-60);
+      display: flex; align-items: center; gap: 12px;
+    }
+    .trust-item-icon { font-size: 20px; flex-shrink: 0; }
+    .trust-tag { color: rgba(252,165,165,.7); font-size: 13px; font-weight: 600; letter-spacing: .05em; margin-bottom: 12px; text-transform: uppercase; }
+
+    /* ── PRICING ── */
+    #pricing { background: var(--navy); text-align: center; }
+    .pricing-card {
+      max-width: 500px; margin: 48px auto 0;
+      background: var(--navy-2); border: 1px solid rgba(37,99,235,.3);
+      border-radius: 28px; padding: 48px 40px;
+      box-shadow: 0 0 80px rgba(37,99,235,.15), 0 40px 80px rgba(0,0,0,.4);
+      position: relative; overflow: hidden;
+    }
+    .pricing-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--gradient-blue);
+    }
+    .pricing-price { font-size: clamp(56px, 12vw, 88px); font-weight: 900; line-height: 1; letter-spacing: -.04em; }
+    .pricing-price sup { font-size: .35em; vertical-align: super; color: var(--blue-glow); }
+    .pricing-desc { font-size: 17px; color: var(--white-60); margin: 12px 0 32px; }
+    .pricing-features { text-align: left; display: flex; flex-direction: column; gap: 12px; margin-bottom: 36px; }
+    .pricing-feature { display: flex; align-items: center; gap: 10px; font-size: 15px; }
+    .pricing-check { color: var(--emerald); font-size: 16px; flex-shrink: 0; }
+    .pricing-note { font-size: 13px; color: var(--white-30); margin-top: 20px; }
+
+    /* ── FAQ ── */
+    #faq { background: var(--black); }
+    .faq-list { display: flex; flex-direction: column; gap: 12px; margin-top: 44px; max-width: 720px; margin-left: auto; margin-right: auto; }
+    .faq-item {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 16px; overflow: hidden;
+    }
+    .faq-q {
+      width: 100%; text-align: left; background: none; border: none; cursor: pointer;
+      padding: 24px 28px; font-family: var(--font); font-size: 16px; font-weight: 600;
+      color: var(--white); display: flex; justify-content: space-between; align-items: center; gap: 16px;
+      transition: background .2s;
+    }
+    .faq-q:hover { background: var(--white-05); }
+    .faq-icon { font-size: 20px; transition: transform .3s; flex-shrink: 0; color: var(--blue-glow); }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-a {
+      max-height: 0; overflow: hidden; transition: max-height .4s ease, padding .3s ease;
+      padding: 0 28px; font-size: 15px; color: var(--white-60); line-height: 1.65;
+    }
+    .faq-item.open .faq-a { max-height: 200px; padding: 0 28px 24px; }
+
+    /* ── FINAL CTA ── */
+    #final {
+      background: var(--black);
+      text-align: center; padding: 120px 24px;
+      position: relative; overflow: hidden;
+    }
+    #final::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 80% at 50% 100%, rgba(37,99,235,.2) 0%, transparent 70%);
+    }
+    .final-inner { position: relative; max-width: 700px; margin: 0 auto; }
+    .final-title { font-size: clamp(30px, 5vw, 52px); font-weight: 900; letter-spacing: -.03em; line-height: 1.15; margin-bottom: 20px; }
+    .final-sub { font-size: 17px; color: var(--white-60); margin-bottom: 48px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy-2);
+      border-top: 1px solid var(--border);
+      padding: 40px 24px;
+    }
+    .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+    .footer-logo { font-size: 14px; font-weight: 800; color: var(--white-60); }
+    .footer-logo span { color: var(--blue-glow); }
+    .footer-links { display: flex; gap: 24px; flex-wrap: wrap; }
+    .footer-links a { font-size: 13px; color: var(--white-30); text-decoration: none; transition: color .2s; }
+    .footer-links a:hover { color: var(--white-60); }
+    .footer-copy { font-size: 12px; color: var(--white-30); width: 100%; text-align: center; padding-top: 20px; border-top: 1px solid var(--border); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .section { padding: 72px 0; }
+      .problem-grid { grid-template-columns: 1fr; }
+      .product-grid { grid-template-columns: 1fr; }
+      .who-grid { grid-template-columns: 1fr 1fr; }
+      .pricing-card { padding: 36px 24px; }
+      nav { padding: 14px 16px; }
+      .nav-cta { display: none; }
+    }
+    @media (max-width: 480px) {
+      .who-grid { grid-template-columns: 1fr; }
+      .formula-parts { gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">OMB<span>.</span></div>
+  <a href="#pricing" class="nav-cta">Get Access — $7</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-badge"><span class="hero-badge-dot"></span>New for 2026 — AI-Powered Income Models</div>
+    <h1 class="hero-title">
+      One Paycheck<br/>
+      Is <span class="accent">Dangerous.</span>
+    </h1>
+    <p class="hero-sub">Build a second income with a One Man Business using AI, simple skills, and modern tools.</p>
+    <p class="hero-trust-text">No team. No investors. No fluff. Just a real path for normal people.</p>
+    <div class="hero-cta-wrap">
+      <a href="#pricing" class="btn btn--primary btn--lg">
+        Get Instant Access — $7 <span class="btn-arrow">→</span>
+      </a>
+      <div class="trust-line">
+        <span>Instant download</span>
+        <span class="dot"></span>
+        <span>Beginner friendly</span>
+        <span class="dot"></span>
+        <span>Takes 30 min to read</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF STRIP -->
+<div class="proof-strip">
+  <div class="proof-strip-inner">
+    <div class="proof-item"><span class="proof-icon">⚡</span>Instant digital delivery</div>
+    <div class="proof-item"><span class="proof-icon">🤖</span>Built for the AI era</div>
+    <div class="proof-item"><span class="proof-icon">🇺🇸</span>Written for the US market</div>
+    <div class="proof-item"><span class="proof-icon">🔒</span>Secure checkout</div>
+    <div class="proof-item"><span class="proof-icon">💸</span>7-day money back</div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section id="problem" class="section">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-label">The Problem</div>
+      <h2 class="section-title">Most people rely on a system<br/>that no longer protects them.</h2>
+      <p class="section-sub">The rules changed. But most people are still playing by the old ones.</p>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card fade-up delay-1">
+        <div class="problem-card-icon">⚠️</div>
+        <div class="problem-card-title">One salary = one risk</div>
+        <div class="problem-card-text">One layoff, one bad quarter, one manager's decision — and everything stops. Your income has a single point of failure.</div>
+      </div>
+      <div class="problem-card fade-up delay-2">
+        <div class="problem-card-icon">📈</div>
+        <div class="problem-card-title">Prices outpace paychecks</div>
+        <div class="problem-card-text">Rent, groceries, healthcare — everything costs more. Your salary stays roughly the same. The gap grows every year.</div>
+      </div>
+      <div class="problem-card fade-up delay-3">
+        <div class="problem-card-icon">🤖</div>
+        <div class="problem-card-title">AI is reshaping labor</div>
+        <div class="problem-card-text">Entire job categories are being automated. The question isn't if it affects you — it's when. Those who adapt win.</div>
+      </div>
+      <div class="problem-card fade-up delay-4">
+        <div class="problem-card-icon">🔑</div>
+        <div class="problem-card-title">Someone else controls your income</div>
+        <div class="problem-card-text">Your hours. Your raise. Your future. All decided in a meeting you weren't invited to. That's the definition of dependency.</div>
+      </div>
+    </div>
+    <div class="problem-conclusion fade-up delay-5">
+      That model worked before. It doesn't work now.
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SOLUTION -->
+<section id="solution" class="section">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-label">The New Model</div>
+      <h2 class="section-title">The new model is simple.</h2>
+    </div>
+    <div class="formula-parts fade-up delay-1">
+      <div class="formula-part">👤 One Person</div>
+      <div class="formula-op">+</div>
+      <div class="formula-part">🤖 AI</div>
+      <div class="formula-op">+</div>
+      <div class="formula-part">🌐 Internet</div>
+      <div class="formula-op">=</div>
+      <div class="formula-eq">💰 Income Leverage</div>
+    </div>
+    <p class="solution-text fade-up delay-2">
+      Today, a single person can build profitable digital income streams without a team, an office, or investors. The internet removed the barriers. AI removed the skill gap. The only thing left is knowing where to start.
+    </p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PRODUCT -->
+<section id="product" class="section">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-label">Inside the Guide</div>
+      <h2 class="section-title">Inside the OMB Starter Guide</h2>
+      <p class="section-sub">Six chapters. Zero fluff. Every page earns its place.</p>
+    </div>
+    <div class="product-grid">
+      <div class="product-card fade-up delay-1">
+        <div class="product-card-icon">🗺️</div>
+        <div class="product-num">Chapter 01</div>
+        <div class="product-card-title">5 Real One Man Business Models for 2026</div>
+        <div class="product-card-text">Proven income models that actually work this year — not recycled ideas from 2018. Each one is built for AI leverage and solo execution.</div>
+      </div>
+      <div class="product-card fade-up delay-2">
+        <div class="product-card-icon">🎯</div>
+        <div class="product-num">Chapter 02</div>
+        <div class="product-card-title">Find Your Best Model in 15 Minutes</div>
+        <div class="product-card-text">A clear framework to match your skills, time, and goals to the right model. No endless analysis, no second-guessing.</div>
+      </div>
+      <div class="product-card fade-up delay-3">
+        <div class="product-card-icon">⚡</div>
+        <div class="product-num">Chapter 03</div>
+        <div class="product-card-title">Best AI Tools to Accelerate Your Start</div>
+        <div class="product-card-text">The specific tools that replace a full team. Design, writing, research, automation — all covered. Most are free or cheap.</div>
+      </div>
+      <div class="product-card fade-up delay-4">
+        <div class="product-card-icon">💵</div>
+        <div class="product-num">Chapter 04</div>
+        <div class="product-card-title">How to Make Your First $100</div>
+        <div class="product-card-text">The exact sequence to go from zero to first dollar. Not theory — a practical action sequence for real beginners.</div>
+      </div>
+      <div class="product-card fade-up delay-5">
+        <div class="product-card-icon">📅</div>
+        <div class="product-num">Chapter 05</div>
+        <div class="product-card-title">7-Day Launch Plan</div>
+        <div class="product-card-text">Day-by-day. Realistic for someone who still has a job. No quit-your-job-tomorrow nonsense — just a clear, doable path.</div>
+      </div>
+      <div class="product-card fade-up delay-6">
+        <div class="product-card-icon">🚫</div>
+        <div class="product-num">Chapter 06</div>
+        <div class="product-card-title">Beginner Mistakes That Kill Momentum</div>
+        <div class="product-card-text">The specific errors that waste weeks and kill motivation. Know them before you make them — and skip straight to progress.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TRANSFORMATION -->
+<section id="transform" class="section">
+  <div class="container">
+    <div class="fade-up" style="text-align:center;margin-bottom:0;">
+      <div class="section-label">The Shift</div>
+      <h2 class="section-title">From confusion to clarity.</h2>
+    </div>
+    <div class="transform-grid fade-up delay-1">
+      <div class="transform-card transform-card--before">
+        <div class="transform-label transform-label--before">🔴 Before</div>
+        <div class="transform-items">
+          <div class="transform-item"><span class="transform-item-icon">❌</span>Wants more income, has no idea where to start</div>
+          <div class="transform-item"><span class="transform-item-icon">❌</span>Scrolling YouTube for hours, finding nothing actionable</div>
+          <div class="transform-item"><span class="transform-item-icon">❌</span>Feels like every opportunity requires skills they don't have</div>
+          <div class="transform-item"><span class="transform-item-icon">❌</span>Paralyzed by endless options and zero direction</div>
+          <div class="transform-item"><span class="transform-item-icon">❌</span>Another Monday dreading the commute</div>
+        </div>
+      </div>
+      <div class="transform-arrow">→</div>
+      <div class="transform-card transform-card--after">
+        <div class="transform-label transform-label--after">✅ After</div>
+        <div class="transform-items">
+          <div class="transform-item"><span class="transform-item-icon">✅</span>Knows exactly which model fits their life and schedule</div>
+          <div class="transform-item"><span class="transform-item-icon">✅</span>Has a clear 7-day plan and knows what to do this week</div>
+          <div class="transform-item"><span class="transform-item-icon">✅</span>Using AI tools to do in hours what used to take weeks</div>
+          <div class="transform-item"><span class="transform-item-icon">✅</span>Building the first asset that earns while they sleep</div>
+          <div class="transform-item"><span class="transform-item-icon">✅</span>Feels in control of their financial direction</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHO -->
+<section id="who" class="section">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-label">Who It's For</div>
+      <h2 class="section-title">Built for people who want more control.</h2>
+      <p class="section-sub">If any of these sound like you, this guide was written for you specifically.</p>
+    </div>
+    <div class="who-grid">
+      <div class="who-tile fade-up delay-1"><span class="who-tile-icon">💼</span><span class="who-tile-text">Full-time employees who want income outside their job</span></div>
+      <div class="who-tile fade-up delay-2"><span class="who-tile-icon">🧑‍💻</span><span class="who-tile-text">Freelancers looking for more stable, scalable income</span></div>
+      <div class="who-tile fade-up delay-3"><span class="who-tile-icon">🚀</span><span class="who-tile-text">Complete beginners who don't know where to start</span></div>
+      <div class="who-tile fade-up delay-4"><span class="who-tile-icon">📱</span><span class="who-tile-text">Creators who want to monetize their skills and ideas</span></div>
+      <div class="who-tile fade-up delay-5"><span class="who-tile-icon">😤</span><span class="who-tile-text">People tired of depending on one company for everything</span></div>
+      <div class="who-tile fade-up delay-6"><span class="who-tile-icon">🧠</span><span class="who-tile-text">Smart overthinkers stuck in research mode, ready to act</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TRUST -->
+<section id="trust" class="section--sm">
+  <div class="container">
+    <div class="trust-inner">
+      <div class="tag fade-up">Zero BS Guarantee</div>
+      <h2 class="section-title fade-up delay-1">No fake guru nonsense.</h2>
+      <p class="section-sub fade-up delay-2" style="margin:0 auto 48px;">No rented Lamborghinis. No "make $10k tomorrow" promises. No hour-long videos before getting to the point.</p>
+      <div class="trust-items">
+        <div class="trust-item fade-up delay-1"><span class="trust-item-icon">🎯</span>Practical strategies only — no motivational filler</div>
+        <div class="trust-item fade-up delay-2"><span class="trust-item-icon">⏱️</span>Respects your time — under 30 minutes to read the whole thing</div>
+        <div class="trust-item fade-up delay-3"><span class="trust-item-icon">🌍</span>Written for real people with real schedules and real budgets</div>
+        <div class="trust-item fade-up delay-4"><span class="trust-item-icon">🤖</span>Built for the AI era — not repurposed advice from 2015</div>
+        <div class="trust-item fade-up delay-5"><span class="trust-item-icon">📖</span>Actionable from page one — you'll know what to do tonight</div>
+        <div class="trust-item fade-up delay-6"><span class="trust-item-icon">💰</span>7-day money-back, no questions asked</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PRICING -->
+<section id="pricing" class="section">
+  <div class="container">
+    <div class="fade-up" style="text-align:center;">
+      <div class="section-label">Pricing</div>
+      <h2 class="section-title">One lunch or one new direction.</h2>
+      <p class="section-sub" style="margin:0 auto;">You decide what you do with the next 7 dollars.</p>
+    </div>
+    <div class="pricing-card fade-up delay-1">
+      <div class="price-badge">🔓 Full Access · Instant Download</div>
+      <div class="pricing-price"><sup>$</sup>7</div>
+      <p class="pricing-desc">Small price. Potentially life-changing idea.</p>
+      <div class="pricing-features">
+        <div class="pricing-feature"><span class="pricing-check">✓</span>5 proven One Man Business models for 2026</div>
+        <div class="pricing-feature"><span class="pricing-check">✓</span>15-minute model selection framework</div>
+        <div class="pricing-feature"><span class="pricing-check">✓</span>Best AI tools to replace a full team</div>
+        <div class="pricing-feature"><span class="pricing-check">✓</span>First $100 action sequence</div>
+        <div class="pricing-feature"><span class="pricing-check">✓</span>7-day launch plan (works alongside your job)</div>
+        <div class="pricing-feature"><span class="pricing-check">✓</span>Top beginner mistakes to avoid</div>
+        <div class="pricing-feature"><span class="pricing-check">✓</span>7-day money-back guarantee</div>
+      </div>
+      <a href="#" class="btn btn--primary btn--lg" style="width:100%;justify-content:center;" onclick="handlePurchase(event)">
+        Get OMB Starter Guide <span class="btn-arrow">→</span>
+      </a>
+      <p class="pricing-note">⚡ Instant access after payment · PDF format · No subscriptions</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FAQ -->
+<section id="faq" class="section">
+  <div class="container">
+    <div class="fade-up" style="text-align:center;">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">Quick answers.</h2>
+    </div>
+    <div class="faq-list fade-up delay-1">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Is this for complete beginners? <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Yes. The guide assumes you're starting from scratch. No prior business experience, no technical background, no audience required. Everything is explained from the ground up.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Do I need startup money or capital? <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">No. All five models in the guide can be started with zero or near-zero budget. Most of the AI tools recommended are free or have generous free tiers. Your biggest investment is time.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Is this a course or just a PDF? <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">It's a focused, structured guide — not a bloated course with hours of video to watch. You get a clear, readable document you can finish in under 30 minutes and act on immediately. No logins, no platforms, no upsells.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          How fast do I get access after paying? <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Instantly. As soon as payment is confirmed, you'll receive a download link via email. No waiting, no manual approval.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          How long does it take to read? <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">Most people finish it in 25–35 minutes. It's written to be dense with value and light on filler — every page earns its place. You can read the whole thing on your lunch break.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          What if it's not for me? <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">We offer a 7-day money-back guarantee, no questions asked. Just email us and we'll refund you immediately. At $7, the risk is basically zero.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section id="final">
+  <div class="final-inner">
+    <div class="fade-up">
+      <div class="tag" style="margin:0 auto 28px;">Your next move</div>
+      <h2 class="final-title">
+        Your job can help you survive.<br/>
+        Your own income stream can<br/>
+        help you <span style="background:linear-gradient(135deg,#60a5fa,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">breathe.</span>
+      </h2>
+      <p class="final-sub">7 dollars. One decision. A different direction.</p>
+      <a href="#pricing" class="btn btn--primary btn--lg fade-up delay-1">
+        Start Today — $7 <span class="btn-arrow">→</span>
+      </a>
+      <div class="trust-line" style="margin-top:20px;">
+        <span>Instant download</span>
+        <span class="dot"></span>
+        <span>7-day money back</span>
+        <span class="dot"></span>
+        <span>No subscriptions</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">OMB<span>.</span> Starter Guide</div>
+    <div class="footer-links">
+      <a href="/terms">Terms</a>
+      <a href="/privacy">Privacy</a>
+      <a href="/contact">Contact</a>
+      <a href="/refund">Refund Policy</a>
+    </div>
+  </div>
+  <div class="footer-inner">
+    <p class="footer-copy">© 2026 OMB Starter Guide. All rights reserved. This is a digital product for educational purposes. Results vary based on individual effort and circumstances.</p>
+  </div>
+</footer>
+
+<script>
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // FAQ toggle
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // Purchase handler — wire up to Stripe or other processor
+  function handlePurchase(e) {
+    e.preventDefault();
+    // Replace with your Stripe payment link or checkout URL:
+    // window.location.href = 'https://buy.stripe.com/YOUR_LINK';
+    alert('Connect your payment processor here (Stripe, Gumroad, Lemon Squeezy, etc.)');
+  }
+
+  // Sticky nav shadow on scroll
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.style.background = window.scrollY > 40
+      ? 'rgba(2,4,8,.95)'
+      : 'rgba(2,4,8,.7)';
+  }, { passive: true });
+</script>
+</body>
+</html>
