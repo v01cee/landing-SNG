@@ -34,12 +34,7 @@
       --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
-    html {
-      scroll-behavior: smooth;
-      scroll-snap-type: y mandatory;
-      overflow-y: scroll;
-      height: 100%;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: var(--font);
@@ -51,37 +46,7 @@
       user-select: none;
       -webkit-user-select: none;
       -webkit-touch-callout: none;
-      height: 100%;
     }
-
-    /* Каждая секция — 100vh со snap */
-    section, .proof-strip, footer {
-      scroll-snap-align: start;
-      scroll-snap-stop: always;
-    }
-
-    #hero               { min-height: 100vh; }
-    .proof-strip        { min-height: 100vh; display: flex; align-items: center; }
-    #problem            { min-height: 100vh; display: flex; align-items: center; }
-    #solution           { min-height: 100vh; display: flex; align-items: center; }
-    #product            { min-height: 100vh; display: flex; align-items: center; }
-    #transform          { min-height: 100vh; display: flex; align-items: center; }
-    #who                { min-height: 100vh; display: flex; align-items: center; }
-    #trust              { min-height: 100vh; display: flex; align-items: center; }
-    #pricing            { min-height: 100vh; display: flex; align-items: center; }
-    #faq                { min-height: 100vh; display: flex; align-items: center; }
-    #final              { min-height: 100vh; display: flex; align-items: center; justify-content: center; }
-    footer              { min-height: auto; scroll-snap-align: start; }
-
-    /* Контейнер внутри flex-секций занимает полную ширину */
-    #problem .container,
-    #solution .container,
-    #product .container,
-    #transform .container,
-    #who .container,
-    #trust .container,
-    #pricing .container,
-    #faq .container { width: 100%; }
 
     /* ── UTILITIES ── */
     .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
