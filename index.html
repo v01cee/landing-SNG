@@ -863,9 +863,16 @@
       }, delay);
     }
 
-    spans.forEach((span, i) => {
-      scrambleChar(span, target[i], i * 80);
-    });
+    function runLoop() {
+      spans.forEach((span, i) => {
+        scrambleChar(span, target[i], i * 80);
+      });
+      // повтор через время анимации + пауза
+      const totalDuration = target.length * 80 + 16 * 60 + 1800;
+      setTimeout(runLoop, totalDuration);
+    }
+
+    runLoop();
   })();
 </script>
 </body>
