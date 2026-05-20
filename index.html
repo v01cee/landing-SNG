@@ -106,6 +106,51 @@
     }
     .trust-line .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--white-30); }
 
+    /* ── STICKY FLOATING CTA ── */
+    .sticky-cta {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      z-index: 999;
+      opacity: 0;
+      transition: transform .4s cubic-bezier(.34,1.56,.64,1), opacity .3s ease;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    .sticky-cta.visible {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .sticky-cta a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--blue);
+      color: #fff;
+      font-family: var(--font);
+      font-size: 15px;
+      font-weight: 700;
+      padding: 14px 28px;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 8px 32px rgba(37,99,235,.5);
+      transition: background .2s, box-shadow .2s, transform .15s;
+    }
+    .sticky-cta a:hover {
+      background: #1d4ed8;
+      box-shadow: 0 12px 40px rgba(37,99,235,.65);
+      transform: scale(1.03);
+    }
+    .sticky-cta-price {
+      background: rgba(255,255,255,.18);
+      border-radius: 20px;
+      padding: 2px 9px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
     /* ── SCROLL ANIMATIONS ── */
     .fade-up { opacity: 0; transform: translateY(40px); transition: opacity .7s ease, transform .7s ease; }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
@@ -218,7 +263,7 @@
 
     /* ── PROBLEM ── */
     #problem { background: var(--navy); }
-    .problem-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 48px; }
+    .problem-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 48px; }
     .problem-card {
       background: var(--card-bg); border: 1px solid var(--border);
       border-radius: 16px; padding: 28px;
@@ -302,7 +347,7 @@
 
     /* ── WHO ── */
     #who { background: var(--navy); }
-    .who-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; margin-top: 44px; }
+    .who-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 44px; }
     .who-tile {
       display: flex; align-items: center; gap: 14px;
       background: var(--card-bg); border: 1px solid var(--border);
@@ -312,6 +357,48 @@
     .who-tile:hover { border-color: rgba(37,99,235,.4); background: rgba(37,99,235,.07); }
     .who-tile-icon { font-size: 22px; flex-shrink: 0; }
     .who-tile-text { font-size: 15px; font-weight: 500; }
+
+    /* ── UNIVERSAL SHOW MORE (mobile only) ── */
+    .show-more-wrap { display: none; text-align: center; margin-top: 16px; }
+    .show-more-btn {
+      font-family: var(--font); font-size: 14px; font-weight: 600;
+      color: var(--blue-glow); background: rgba(37,99,235,.1);
+      border: 1px solid rgba(37,99,235,.3); border-radius: 10px;
+      padding: 12px 28px; cursor: pointer; transition: all .2s;
+    }
+    .show-more-btn:hover { background: rgba(37,99,235,.2); }
+
+    /* ── MARQUEE proof-strip (mobile) ── */
+    @keyframes marquee-scroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    @media (max-width: 768px) {
+      .mob-extra { display: none !important; }
+      .mob-extra.mob-shown { display: block !important; }
+      .who-tile.mob-extra.mob-shown,
+      .trust-item.mob-extra.mob-shown { display: flex !important; }
+      .mob-extra-block { display: none !important; }
+      .mob-extra-block.mob-shown { display: block !important; }
+      .show-more-wrap { display: block; }
+
+      /* Прячем оригинальный strip и показываем маркий */
+      .proof-strip-inner { display: none !important; }
+      .proof-marquee-track {
+        overflow: hidden;
+        mask-image: linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%);
+        -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 10%, black 90%, transparent 100%);
+      }
+      .proof-marquee-inner {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+        width: max-content;
+        padding: 20px 0;
+        animation: marquee-scroll 14s linear infinite;
+      }
+    }
 
     /* ── TRUST ── */
     #trust { background: var(--black); }
@@ -340,7 +427,7 @@
       background: var(--gradient-blue);
     }
     .pricing-price { font-size: clamp(56px, 12vw, 88px); font-weight: 900; line-height: 1; letter-spacing: -.04em; }
-    .pricing-price sup { font-size: .35em; vertical-align: super; color: var(--blue-glow); }
+    .pricing-price sup { font-size: .48em; vertical-align: super; color: var(--blue-glow); margin-right: 4px; }
     .pricing-desc { font-size: 17px; color: var(--white-60); margin: 12px 0 32px; }
     .pricing-features { text-align: left; display: flex; flex-direction: column; gap: 12px; margin-bottom: 36px; }
     .pricing-feature { display: flex; align-items: center; gap: 10px; font-size: 15px; }
@@ -356,18 +443,24 @@
     }
     .faq-q {
       width: 100%; text-align: left; background: none; border: none; cursor: pointer;
-      padding: 24px 28px; font-family: var(--font); font-size: 16px; font-weight: 600;
-      color: var(--white); display: flex; justify-content: space-between; align-items: center; gap: 16px;
+      padding: 28px 32px; font-family: var(--font); font-size: 17px; font-weight: 600;
+      color: var(--white); display: flex; justify-content: space-between; align-items: center; gap: 20px;
       transition: background .2s;
     }
     .faq-q:hover { background: var(--white-05); }
-    .faq-icon { font-size: 20px; transition: transform .3s; flex-shrink: 0; color: var(--blue-glow); }
-    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-icon {
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: transform .35s cubic-bezier(.4,0,.2,1);
+    }
+    .faq-item.open .faq-icon {
+      transform: rotate(180deg);
+    }
     .faq-a {
       max-height: 0; overflow: hidden; transition: max-height .4s ease, padding .3s ease;
       padding: 0 28px; font-size: 15px; color: var(--white-60); line-height: 1.65;
     }
-    .faq-item.open .faq-a { max-height: 200px; padding: 0 28px 24px; }
+    .faq-item.open .faq-a { max-height: 200px; padding: 0 32px 28px; }
 
     /* ── FINAL CTA ── */
     #final {
@@ -578,25 +671,26 @@
         <div class="product-card-title">Best AI Tools to Accelerate Your Start</div>
         <div class="product-card-text">The specific tools that replace a full team. Design, writing, research, automation — all covered. Most are free or cheap.</div>
       </div>
-      <div class="product-card fade-up delay-4">
+      <div class="product-card fade-up delay-4 mob-extra">
         <div class="product-card-icon">💵</div>
         <div class="product-num">Chapter 04</div>
         <div class="product-card-title">How to Make Your First $100</div>
         <div class="product-card-text">The exact sequence to go from zero to first dollar. Not theory — a practical action sequence for real beginners.</div>
       </div>
-      <div class="product-card fade-up delay-5">
+      <div class="product-card fade-up delay-5 mob-extra">
         <div class="product-card-icon">📅</div>
         <div class="product-num">Chapter 05</div>
         <div class="product-card-title">7-Day Launch Plan</div>
         <div class="product-card-text">Day-by-day. Realistic for someone who still has a job. No quit-your-job-tomorrow nonsense — just a clear, doable path.</div>
       </div>
-      <div class="product-card fade-up delay-6">
+      <div class="product-card fade-up delay-6 mob-extra">
         <div class="product-card-icon">🚫</div>
         <div class="product-num">Chapter 06</div>
         <div class="product-card-title">Beginner Mistakes That Kill Momentum</div>
         <div class="product-card-text">The specific errors that waste weeks and kill motivation. Know them before you make them — and skip straight to progress.</div>
       </div>
     </div>
+    <div class="show-more-wrap"><button class="show-more-btn" data-section="product">Show more ↓</button></div>
   </div>
 </section>
 
@@ -616,8 +710,8 @@
           <div class="transform-item"><span class="transform-item-icon">❌</span>Wants more income, has no idea where to start</div>
           <div class="transform-item"><span class="transform-item-icon">❌</span>Scrolling YouTube for hours, finding nothing actionable</div>
           <div class="transform-item"><span class="transform-item-icon">❌</span>Feels like every opportunity requires skills they don't have</div>
-          <div class="transform-item"><span class="transform-item-icon">❌</span>Paralyzed by endless options and zero direction</div>
-          <div class="transform-item"><span class="transform-item-icon">❌</span>Another Monday dreading the commute</div>
+          <div class="transform-item mob-extra-block"><span class="transform-item-icon">❌</span>Paralyzed by endless options and zero direction</div>
+          <div class="transform-item mob-extra-block"><span class="transform-item-icon">❌</span>Another Monday dreading the commute</div>
         </div>
       </div>
       <div class="transform-arrow">→</div>
@@ -627,8 +721,8 @@
           <div class="transform-item"><span class="transform-item-icon">✅</span>Knows exactly which model fits their life and schedule</div>
           <div class="transform-item"><span class="transform-item-icon">✅</span>Has a clear 7-day plan and knows what to do this week</div>
           <div class="transform-item"><span class="transform-item-icon">✅</span>Using AI tools to do in hours what used to take weeks</div>
-          <div class="transform-item"><span class="transform-item-icon">✅</span>Building the first asset that earns while they sleep</div>
-          <div class="transform-item"><span class="transform-item-icon">✅</span>Feels in control of their financial direction</div>
+          <div class="transform-item mob-extra-block"><span class="transform-item-icon">✅</span>Building the first asset that earns while they sleep</div>
+          <div class="transform-item mob-extra-block"><span class="transform-item-icon">✅</span>Feels in control of their financial direction</div>
         </div>
       </div>
     </div>
@@ -650,9 +744,12 @@
       <div class="who-tile fade-up delay-2"><span class="who-tile-icon">🧑‍💻</span><span class="who-tile-text">Freelancers looking for more stable, scalable income</span></div>
       <div class="who-tile fade-up delay-3"><span class="who-tile-icon">🚀</span><span class="who-tile-text">Complete beginners who don't know where to start</span></div>
       <div class="who-tile fade-up delay-4"><span class="who-tile-icon">📱</span><span class="who-tile-text">Creators who want to monetize their skills and ideas</span></div>
-      <div class="who-tile fade-up delay-5"><span class="who-tile-icon">😤</span><span class="who-tile-text">People tired of depending on one company for everything</span></div>
-      <div class="who-tile fade-up delay-6"><span class="who-tile-icon">🧠</span><span class="who-tile-text">Smart overthinkers stuck in research mode, ready to act</span></div>
+      <div class="who-tile fade-up delay-5 mob-extra"><span class="who-tile-icon">😤</span><span class="who-tile-text">People tired of depending on one company for everything</span></div>
+      <div class="who-tile fade-up delay-6 mob-extra"><span class="who-tile-icon">🧠</span><span class="who-tile-text">Smart overthinkers stuck in research mode, ready to act</span></div>
+      <div class="who-tile fade-up delay-1 mob-extra"><span class="who-tile-icon">🌍</span><span class="who-tile-text">Remote workers who want income that travels with them</span></div>
+      <div class="who-tile fade-up delay-2 mob-extra"><span class="who-tile-icon">💡</span><span class="who-tile-text">Side hustlers ready to turn ideas into real income streams</span></div>
     </div>
+    <div class="show-more-wrap"><button class="show-more-btn" data-section="who">Show more ↓</button></div>
   </div>
 </section>
 
@@ -669,10 +766,11 @@
         <div class="trust-item fade-up delay-1"><span class="trust-item-icon">🎯</span>Practical strategies only — no motivational filler</div>
         <div class="trust-item fade-up delay-2"><span class="trust-item-icon">⏱️</span>Respects your time — under 30 minutes to read the whole thing</div>
         <div class="trust-item fade-up delay-3"><span class="trust-item-icon">🌍</span>Written for real people with real schedules and real budgets</div>
-        <div class="trust-item fade-up delay-4"><span class="trust-item-icon">🤖</span>Built for the AI era — not repurposed advice from 2015</div>
-        <div class="trust-item fade-up delay-5"><span class="trust-item-icon">📖</span>Actionable from page one — you'll know what to do tonight</div>
-        <div class="trust-item fade-up delay-6"><span class="trust-item-icon">💰</span>7-day money-back, no questions asked</div>
+        <div class="trust-item fade-up delay-4 mob-extra"><span class="trust-item-icon">🤖</span>Built for the AI era — not repurposed advice from 2015</div>
+        <div class="trust-item fade-up delay-5 mob-extra"><span class="trust-item-icon">📖</span>Actionable from page one — you'll know what to do tonight</div>
+        <div class="trust-item fade-up delay-6 mob-extra"><span class="trust-item-icon">💰</span>7-day money-back, no questions asked</div>
       </div>
+      <div class="show-more-wrap"><button class="show-more-btn" data-section="trust">Show more ↓</button></div>
     </div>
   </div>
 </section>
@@ -720,41 +818,42 @@
     <div class="faq-list fade-up delay-1">
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">
-          Is this for complete beginners? <span class="faq-icon">+</span>
+          Is this for complete beginners? <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 5L7 10L12 5" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </button>
         <div class="faq-a">Yes. The guide assumes you're starting from scratch. No prior business experience, no technical background, no audience required. Everything is explained from the ground up.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">
-          Do I need startup money or capital? <span class="faq-icon">+</span>
+          Do I need startup money or capital? <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 5L7 10L12 5" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </button>
         <div class="faq-a">No. All five models in the guide can be started with zero or near-zero budget. Most of the AI tools recommended are free or have generous free tiers. Your biggest investment is time.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" onclick="toggleFaq(this)">
-          Is this a course or just a PDF? <span class="faq-icon">+</span>
+          Is this a course or just a PDF? <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 5L7 10L12 5" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </button>
         <div class="faq-a">It's a focused, structured guide — not a bloated course with hours of video to watch. You get a clear, readable document you can finish in under 30 minutes and act on immediately. No logins, no platforms, no upsells.</div>
       </div>
-      <div class="faq-item">
+      <div class="faq-item mob-extra-block">
         <button class="faq-q" onclick="toggleFaq(this)">
-          How fast do I get access after paying? <span class="faq-icon">+</span>
+          How fast do I get access after paying? <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 5L7 10L12 5" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </button>
         <div class="faq-a">Instantly. As soon as payment is confirmed, you'll receive a download link via email. No waiting, no manual approval.</div>
       </div>
-      <div class="faq-item">
+      <div class="faq-item mob-extra-block">
         <button class="faq-q" onclick="toggleFaq(this)">
-          How long does it take to read? <span class="faq-icon">+</span>
+          How long does it take to read? <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 5L7 10L12 5" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </button>
         <div class="faq-a">Most people finish it in 25–35 minutes. It's written to be dense with value and light on filler — every page earns its place. You can read the whole thing on your lunch break.</div>
       </div>
-      <div class="faq-item">
+      <div class="faq-item mob-extra-block">
         <button class="faq-q" onclick="toggleFaq(this)">
-          What if it's not for me? <span class="faq-icon">+</span>
+          What if it's not for me? <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 5L7 10L12 5" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </button>
         <div class="faq-a">We offer a 7-day money-back guarantee, no questions asked. Just email us and we'll refund you immediately. At $7, the risk is basically zero.</div>
       </div>
     </div>
+    <div class="show-more-wrap"><button class="show-more-btn" data-section="faq">Show more ↓</button></div>
   </div>
 </section>
 
@@ -799,6 +898,11 @@
   </div>
 </footer>
 
+<!-- STICKY FLOATING CTA -->
+<div class="sticky-cta" id="stickyCta">
+  <a href="#pricing">Get Instant Access</a>
+</div>
+
 <script>
   // Scroll animations
   const observer = new IntersectionObserver((entries) => {
@@ -822,12 +926,52 @@
     alert('Connect your payment processor here (Stripe, Gumroad, Lemon Squeezy, etc.)');
   }
 
-  // Sticky nav shadow on scroll
+  // Marquee только для proof-strip на мобилке
+  if (window.innerWidth <= 768) {
+    const strip = document.querySelector('.proof-strip');
+    const items = Array.from(document.querySelectorAll('.proof-item'));
+    if (strip && items.length) {
+      const track = document.createElement('div');
+      track.className = 'proof-marquee-track';
+      const inner = document.createElement('div');
+      inner.className = 'proof-marquee-inner';
+      [...items, ...items].forEach(item => {
+        const clone = item.cloneNode(true);
+        inner.appendChild(clone);
+      });
+      track.appendChild(inner);
+      strip.appendChild(track);
+    }
+  }
+
+  // Show-more buttons (mobile only)
+  document.querySelectorAll('.show-more-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const section = btn.closest('section');
+      const extras = section.querySelectorAll('.mob-extra, .mob-extra-block');
+      const isOpen = btn.dataset.open === '1';
+      extras.forEach(el => el.classList.toggle('mob-shown', !isOpen));
+      btn.dataset.open = isOpen ? '0' : '1';
+      btn.textContent = isOpen ? 'Show more ↓' : 'Show less ↑';
+    });
+  });
+
+  // Sticky nav shadow on scroll + sticky CTA visibility
   const nav = document.querySelector('nav');
+  const stickyCta = document.getElementById('stickyCta');
+  const heroSection = document.querySelector('#hero, section');
   window.addEventListener('scroll', () => {
-    nav.style.background = window.scrollY > 40
-      ? 'rgba(2,4,8,.95)'
-      : 'rgba(2,4,8,.7)';
+    const scrollY = window.scrollY;
+    nav.style.background = scrollY > 40 ? 'rgba(2,4,8,.95)' : 'rgba(2,4,8,.7)';
+    // Show sticky CTA after scrolling 400px, hide near pricing section
+    const pricingEl = document.getElementById('pricing');
+    const pricingBottom = pricingEl ? pricingEl.getBoundingClientRect().bottom + scrollY : Infinity;
+    const nearPricing = pricingEl && pricingEl.getBoundingClientRect().top < window.innerHeight && pricingEl.getBoundingClientRect().bottom > 0;
+    if (scrollY > 400 && !nearPricing) {
+      stickyCta.classList.add('visible');
+    } else {
+      stickyCta.classList.remove('visible');
+    }
   }, { passive: true });
 
   // Split-flap ticker for "Dangerous."
