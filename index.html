@@ -152,7 +152,7 @@
     }
 
     /* ── SCROLL ANIMATIONS ── */
-    .fade-up { opacity: 0; transform: translateY(40px); transition: opacity .7s ease, transform .7s ease; }
+    .fade-up { opacity: 0; transform: translateY(22px); transition: opacity .6s cubic-bezier(.22,1,.36,1), transform .6s cubic-bezier(.22,1,.36,1); }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
     .fade-up.delay-1 { transition-delay: .1s; }
     .fade-up.delay-2 { transition-delay: .2s; }
@@ -252,7 +252,8 @@
       background: var(--navy-2);
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
-      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+      padding: 14px 0;
     }
     .proof-strip-inner {
       display: flex; align-items: center; justify-content: center;
@@ -414,7 +415,9 @@
     .trust-tag { color: rgba(252,165,165,.7); font-size: 13px; font-weight: 600; letter-spacing: .05em; margin-bottom: 12px; text-transform: uppercase; }
 
     /* ── PRICING ── */
-    #pricing { background: var(--navy); text-align: center; }
+    #pricing { background: var(--navy); text-align: center; padding: 72px 0; }
+    #solution { padding: 72px 0; }
+    #faq { padding: 72px 0; }
     .pricing-card {
       max-width: 500px; margin: 48px auto 0;
       background: var(--navy-2); border: 1px solid rgba(37,99,235,.3);
@@ -465,7 +468,7 @@
     /* ── FINAL CTA ── */
     #final {
       background: var(--black);
-      text-align: center; padding: 120px 24px;
+      text-align: center; padding: 88px 24px;
       position: relative; overflow: hidden;
     }
     #final::before {
@@ -474,7 +477,10 @@
     }
     .final-inner { position: relative; max-width: 700px; margin: 0 auto; }
     .final-title { font-size: clamp(30px, 5vw, 52px); font-weight: 900; letter-spacing: -.03em; line-height: 1.15; margin-bottom: 20px; }
-    .final-sub { font-size: 17px; color: var(--white-60); margin-bottom: 48px; }
+    .final-sub { font-size: 17px; color: var(--white-60); margin-bottom: 40px; }
+    .final-pillars { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; margin: 28px 0 32px; }
+    .final-pillar { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 500; color: var(--white-60); }
+    .final-pillar-icon { font-size: 18px; }
 
     /* ── FOOTER ── */
     footer {
@@ -492,48 +498,77 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
-      .section { padding: 72px 0; }
-      .problem-grid { grid-template-columns: 1fr; }
-      .product-grid { grid-template-columns: 1fr; }
-      .who-grid { grid-template-columns: 1fr 1fr; }
-      .pricing-card { padding: 36px 24px; }
+      .section { padding: 60px 0; }
+      .problem-grid { grid-template-columns: 1fr; gap: 12px; }
+      .product-grid { grid-template-columns: 1fr; gap: 12px; }
+      .who-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .pricing-card { padding: 32px 20px; }
       nav { padding: 14px 16px; }
       .nav-cta { display: none; }
 
-      /* Hero badge — не переносится */
+      /* Hero */
       .hero-badge { font-size: 10px; letter-spacing: .07em; padding: 7px 14px; text-align: center; }
+      .hero-inner { padding: 80px 20px 60px; }
+      .hero-sub { font-size: 16px; }
 
-      /* CTA button — текст в одну строку */
-      .btn--lg { font-size: 17px; padding: 18px 28px; }
+      /* Buttons */
+      .btn--lg { font-size: 16px; padding: 16px 24px; border-radius: 13px; }
       .btn-arrow { display: none; }
 
-      /* Proof strip — 2 колонки */
-      .proof-strip-inner {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 12px 16px;
-        padding: 0 16px;
-      }
-      .proof-item { font-size: 13px; }
+      /* Section titles */
+      .section-title { font-size: clamp(22px, 5.5vw, 34px); }
 
-      /* Formula — вертикально */
+      /* Proof strip — marquee only */
+      .proof-strip { padding: 10px 0; }
+
+      /* Formula */
       .formula-parts { flex-direction: column; align-items: center; gap: 8px; }
       .formula-op { transform: rotate(90deg); }
+      .formula-part { font-size: 16px; }
+      .formula-eq { font-size: 18px; }
 
-      /* Section padding */
-      .section--sm { padding: 56px 0; }
-      #final { padding: 80px 24px; }
+      /* Problem cards */
+      .problem-card { padding: 18px; }
+      .problem-card-icon { font-size: 24px; }
+
+      /* Product cards */
+      .product-card { padding: 18px; }
+
+      /* Who tiles */
+      .who-tile { padding: 14px 12px; gap: 10px; }
+      .who-tile-text { font-size: 13px; }
+      .who-tile-icon { font-size: 18px; }
+
+      /* Trust items */
+      .trust-item { font-size: 14px; }
+
+      /* Pricing */
+      .pricing-features { gap: 10px; }
+      .pricing-feature { font-size: 14px; }
+
+      /* Final pillars */
+      .final-pillars { gap: 16px; flex-direction: column; align-items: center; }
+      .final-pillar { font-size: 14px; }
+
+      /* FAQ */
+      .faq-q { font-size: 15px; padding: 16px 0; }
+
+      /* Section padding overrides */
+      .section--sm { padding: 48px 0; }
+      #final { padding: 72px 24px; }
+      #solution { padding: 56px 0; }
+      #pricing { padding: 60px 0; }
+      #faq { padding: 60px 0; }
     }
 
     @media (max-width: 480px) {
       .who-grid { grid-template-columns: 1fr; }
       .formula-parts { gap: 8px; }
-
-      /* Hero title размер */
-      .hero-title { font-size: 42px; }
-
-      /* Trust items — 1 колонка */
+      .hero-title { font-size: 40px; }
       .trust-items { grid-template-columns: 1fr; }
+      .section-title { font-size: clamp(20px, 6vw, 28px); }
+      .container { padding: 0 16px; }
+      .container--narrow { padding: 0 16px; }
     }
   </style>
 </head>
@@ -541,7 +576,7 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">OMB<span>.</span></div>
+  <div class="nav-logo">OMB</div>
   <a href="#pricing" class="nav-cta">Get Access</a>
 </nav>
 
@@ -592,12 +627,12 @@
     </div>
     <div class="problem-grid">
       <div class="problem-card fade-up delay-1">
-        <div class="problem-card-icon">⚠️</div>
+        <div class="problem-card-icon">💸</div>
         <div class="problem-card-title">One salary = one risk</div>
         <div class="problem-card-text">One layoff, one bad quarter, one manager's decision — and everything stops. Your income has a single point of failure.</div>
       </div>
       <div class="problem-card fade-up delay-2">
-        <div class="problem-card-icon">📈</div>
+        <div class="problem-card-icon">📉</div>
         <div class="problem-card-title">Prices outpace paychecks</div>
         <div class="problem-card-text">Rent, groceries, healthcare — everything costs more. Your salary stays roughly the same. The gap grows every year.</div>
       </div>
@@ -607,13 +642,13 @@
         <div class="problem-card-text">Entire job categories are being automated. The question isn't if it affects you — it's when. Those who adapt win.</div>
       </div>
       <div class="problem-card fade-up delay-4">
-        <div class="problem-card-icon">🔑</div>
+        <div class="problem-card-icon">🔒</div>
         <div class="problem-card-title">Someone else controls your income</div>
         <div class="problem-card-text">Your hours. Your raise. Your future. All decided in a meeting you weren't invited to. That's the definition of dependency.</div>
       </div>
     </div>
     <div class="problem-conclusion fade-up delay-5">
-      That model worked before. It doesn't work now.
+      The old rules are broken. The people who adapt early — win.
     </div>
   </div>
 </section>
@@ -736,17 +771,17 @@
   <div class="container">
     <div class="fade-up">
       <div class="section-label">Who It's For</div>
-      <h2 class="section-title">Built for people who want more control.</h2>
+      <h2 class="section-title">Built for the person who wants more control.</h2>
       <p class="section-sub">If any of these sound like you, this guide was written for you specifically.</p>
     </div>
     <div class="who-grid">
       <div class="who-tile fade-up delay-1"><span class="who-tile-icon">💼</span><span class="who-tile-text">Full-time employees who want income outside their job</span></div>
       <div class="who-tile fade-up delay-2"><span class="who-tile-icon">🧑‍💻</span><span class="who-tile-text">Freelancers looking for more stable, scalable income</span></div>
-      <div class="who-tile fade-up delay-3"><span class="who-tile-icon">🚀</span><span class="who-tile-text">Complete beginners who don't know where to start</span></div>
-      <div class="who-tile fade-up delay-4"><span class="who-tile-icon">📱</span><span class="who-tile-text">Creators who want to monetize their skills and ideas</span></div>
-      <div class="who-tile fade-up delay-5 mob-extra"><span class="who-tile-icon">😤</span><span class="who-tile-text">People tired of depending on one company for everything</span></div>
-      <div class="who-tile fade-up delay-6 mob-extra"><span class="who-tile-icon">🧠</span><span class="who-tile-text">Smart overthinkers stuck in research mode, ready to act</span></div>
-      <div class="who-tile fade-up delay-1 mob-extra"><span class="who-tile-icon">🌍</span><span class="who-tile-text">Remote workers who want income that travels with them</span></div>
+      <div class="who-tile fade-up delay-3"><span class="who-tile-icon">🎯</span><span class="who-tile-text">Complete beginners who don't know where to start</span></div>
+      <div class="who-tile fade-up delay-4"><span class="who-tile-icon">🎨</span><span class="who-tile-text">Creators who want to monetize their skills and ideas</span></div>
+      <div class="who-tile fade-up delay-5 mob-extra"><span class="who-tile-icon">💪</span><span class="who-tile-text">People tired of depending on one company for everything</span></div>
+      <div class="who-tile fade-up delay-6 mob-extra"><span class="who-tile-icon">⚡</span><span class="who-tile-text">Smart overthinkers stuck in research mode, ready to act</span></div>
+      <div class="who-tile fade-up delay-1 mob-extra"><span class="who-tile-icon">🏠</span><span class="who-tile-text">Remote workers who want income that travels with them</span></div>
       <div class="who-tile fade-up delay-2 mob-extra"><span class="who-tile-icon">💡</span><span class="who-tile-text">Side hustlers ready to turn ideas into real income streams</span></div>
     </div>
     <div class="show-more-wrap"><button class="show-more-btn" data-section="who">Show more ↓</button></div>
@@ -783,11 +818,11 @@
     <div class="fade-up" style="text-align:center;">
       <div class="section-label">Pricing</div>
       <h2 class="section-title">One lunch or one new direction.</h2>
-      <p class="section-sub" style="margin:0 auto;">You decide what you do with the next 7 dollars.</p>
+      <p class="section-sub" style="margin:0 auto;">You decide what you do with the next 9 dollars.</p>
     </div>
     <div class="pricing-card fade-up delay-1">
       <div class="price-badge">🔓 Full Access · Instant Download</div>
-      <div class="pricing-price"><sup>$</sup>7</div>
+      <div class="pricing-price"><sup>$</sup>9</div>
       <p class="pricing-desc">Small price. Potentially life-changing idea.</p>
       <div class="pricing-features">
         <div class="pricing-feature"><span class="pricing-check">✓</span>5 proven One Man Business models for 2026</div>
@@ -850,7 +885,7 @@
         <button class="faq-q" onclick="toggleFaq(this)">
           What if it's not for me? <span class="faq-icon"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2 5L7 10L12 5" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </button>
-        <div class="faq-a">We offer a 7-day money-back guarantee, no questions asked. Just email us and we'll refund you immediately. At $7, the risk is basically zero.</div>
+        <div class="faq-a">We offer a 7-day money-back guarantee, no questions asked. Just email us and we'll refund you immediately. At $9, the risk is basically zero.</div>
       </div>
     </div>
     <div class="show-more-wrap"><button class="show-more-btn" data-section="faq">Show more ↓</button></div>
@@ -863,13 +898,18 @@
     <div class="fade-up">
       <div class="tag" style="margin:0 auto 28px;">Your next move</div>
       <h2 class="final-title">
-        Your job can help you survive.<br/>
-        Your own income stream can<br/>
-        help you <span style="background:linear-gradient(135deg,#60a5fa,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">breathe.</span>
+        Stop waiting for a raise.<br/>
+        Build the income<br/>
+        you actually <span style="background:linear-gradient(135deg,#60a5fa,#06b6d4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">own.</span>
       </h2>
-      <p class="final-sub">7 dollars. One decision. A different direction.</p>
-      <a href="#pricing" class="btn btn--primary btn--lg fade-up delay-1">
-        Start Today <span class="btn-arrow">→</span>
+      <div class="final-pillars fade-up delay-1">
+        <div class="final-pillar"><span class="final-pillar-icon">📖</span><span>One focused guide</span></div>
+        <div class="final-pillar"><span class="final-pillar-icon">⏱️</span><span>Read in 30 minutes</span></div>
+        <div class="final-pillar"><span class="final-pillar-icon">🚀</span><span>Act on it the same day</span></div>
+      </div>
+      <p class="final-sub">$9. One decision. A completely different direction.</p>
+      <a href="#pricing" class="btn btn--primary btn--lg fade-up delay-2">
+        Start Today — $9 <span class="btn-arrow">→</span>
       </a>
       <div class="trust-line" style="margin-top:20px;">
         <span>Instant download</span>
@@ -910,12 +950,10 @@
   }, { threshold: 0.12 });
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-  // FAQ toggle
+  // FAQ toggle — multiple can be open simultaneously
   function toggleFaq(btn) {
     const item = btn.closest('.faq-item');
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
-    if (!isOpen) item.classList.add('open');
+    item.classList.toggle('open');
   }
 
   // Purchase handler — wire up to Stripe or other processor
@@ -974,49 +1012,50 @@
     }
   }, { passive: true });
 
-  // Split-flap ticker for "Dangerous."
+  // Split-flap ticker for "DANGEROUS."
   (function() {
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#@!%&';
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#@$!%&';
     const target = 'DANGEROUS.';
     const el = document.querySelector('.hero-title .accent');
     if (!el) return;
 
-    // Build span-per-char structure
     el.innerHTML = target.split('').map(c =>
       `<span class="flap-char">${c}</span>`
     ).join('');
     const spans = el.querySelectorAll('.flap-char');
 
     function scrambleChar(span, finalChar, delay) {
-      let ticks = 0;
-      const maxTicks = 8 + Math.floor(Math.random() * 8);
-      setTimeout(() => {
-        const interval = setInterval(() => {
-          if (ticks >= maxTicks) {
-            clearInterval(interval);
-            span.textContent = finalChar;
-            span.classList.add('flip');
-          } else {
-            span.textContent = chars[Math.floor(Math.random() * chars.length)];
-            span.classList.remove('flip');
-            void span.offsetWidth; // reflow
-            span.classList.add('flip');
-            ticks++;
-          }
-        }, 60);
-      }, delay);
+      return new Promise(resolve => {
+        const maxTicks = 6 + Math.floor(Math.random() * 6);
+        let ticks = 0;
+        setTimeout(() => {
+          const interval = setInterval(() => {
+            if (ticks >= maxTicks) {
+              clearInterval(interval);
+              span.textContent = finalChar;
+              span.style.animation = 'none';
+              span.offsetHeight; // reflow
+              span.style.animation = '';
+              span.classList.add('flip');
+              resolve();
+            } else {
+              span.textContent = chars[Math.floor(Math.random() * chars.length)];
+              ticks++;
+            }
+          }, 55);
+        }, delay);
+      });
     }
 
     function runLoop() {
-      spans.forEach((span, i) => {
-        scrambleChar(span, target[i], i * 80);
-      });
-      // повтор через время анимации + пауза
-      const totalDuration = target.length * 80 + 16 * 60 + 1800;
-      setTimeout(runLoop, totalDuration);
+      const promises = Array.from(spans).map((span, i) =>
+        scrambleChar(span, target[i], i * 70)
+      );
+      setTimeout(runLoop, target.length * 70 + 16 * 55 + 2400);
     }
 
-    runLoop();
+    // Start with slight delay so hero fades in first
+    setTimeout(runLoop, 700);
   })();
 </script>
 </body>
